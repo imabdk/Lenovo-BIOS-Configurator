@@ -20,7 +20,12 @@
     FileName:    Config-LenovoBIOS.ps1
     Author:      Martin Bengtsson
     Created:     20-08-2017
-    Version:     1.0
+    Version:     2.0
+
+    Version history:
+
+    1.0   -   Script created
+    2.0   -   Script updated
 
 .LINK
     https://www.imab.dk/lenovo-bios-configurator
@@ -183,7 +188,7 @@ else {
             Write-Log -Message "No BIOS password is present. Moving on to configure the supervisor password"
             try {
                 Write-Log -Message "Configuring supervisor password to: $SetSupervisorPass"
-                $SetSupervisorPassword = Get-WmiObject -Namespace root/wmi -Class Lenovo_setBiosPassword
+                $SetSupervisorPassword = Get-WmiObject -Namespace root\wmi -Class Lenovo_setBiosPassword
                 $Invocation = $SetSupervisorPassword.SetBiosPassword("pap,$SetSupervisorPass,$SetSupervisorPass,ascii,us").Return
             }
             catch {
@@ -613,7 +618,6 @@ else {
         if ($Invocation -eq "Success") {
             Write-Log -Message "$Name was successfully disabled"
         }
-            
         else { 
             # Nothing to see here yet            
         }
